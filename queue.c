@@ -101,6 +101,7 @@ bool q_insert_tail(queue_t *q, char *s)
         q->tail->next = newh;
         q->tail = newh;
     }
+    newh->next = NULL;
     return true;
 }
 
