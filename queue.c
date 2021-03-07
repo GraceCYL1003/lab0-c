@@ -119,12 +119,12 @@ bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
     if (!q || !q->head) {
         return false;
     }
-    if (sp) {
+    if (sp && q->head->value) {
         strncpy(sp, q->head->value, bufsize);
         sp[bufsize - 1] = '\0';
     }
     list_ele_t *tmp = q->head;
-    q->head = q->head->next;  //
+    q->head = q->head->next;
     tmp->next = NULL;
     free(tmp->value);
     free(tmp);
@@ -153,7 +153,7 @@ int q_size(queue_t *q)
  */
 void q_reverse(queue_t *q)
 {
-    if (!q || !q->head) {
+    if (!q || !q->head || q->size < 2) {
         return;
     }
     list_ele_t *cur = q->head;
